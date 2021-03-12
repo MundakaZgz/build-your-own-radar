@@ -201,11 +201,15 @@ const GoogleSheetInput = function () {
   var self = {}
   var sheet
 
+  self.getINGSheet = function() {
+    window.location = 'http://localhost:8080/?sheetId=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1OGkA0pLMQEo9Z0a738tq0NqTKtsSOx6lWP5LctDPmj8%2Fedit%23gid%3D0';
+  }
+
   self.build = function () {
     var domainName = DomainName(window.location.search.substring(1))
     var queryString = window.location.href.match(/sheetId(.*)/)
     var queryParams = queryString ? QueryParams(queryString[0]) : {}
-
+    
     if (domainName && queryParams.sheetId.endsWith('csv')) {
       sheet = CSVDocument(queryParams.sheetId)
       sheet.init().build()
@@ -215,21 +219,22 @@ const GoogleSheetInput = function () {
 
       sheet.init().build()
     } else {
-      var content = d3.select('body')
-        .append('div')
-        .attr('class', 'input-sheet')
-      setDocumentTitle()
+      this.getINGSheet();
+      //var content = d3.select('body')
+      //  .append('div')
+      //  .attr('class', 'input-sheet')
+      //setDocumentTitle()
 
-      plotLogo(content)
+      //plotLogo(content)
 
-      var bannerText = '<div><h1>Build your own radar</h1><p>Once you\'ve <a href ="https://www.thoughtworks.com/radar/byor">created your Radar</a>, you can use this service' +
-        ' to generate an <br />interactive version of your Technology Radar. Not sure how? <a href ="https://www.thoughtworks.com/radar/how-to-byor">Read this first.</a></p></div>'
+      //var bannerText = '<div><h1>Build your own radar</h1><p>Once you\'ve <a href ="https://www.thoughtworks.com/radar/byor">created your Radar</a>, you can use this service' +
+      //  ' to generate an <br />interactive version of your Technology Radar. Not sure how? <a href ="https://www.thoughtworks.com/radar/how-to-byor">Read this first.</a></p></div>'
 
-      plotBanner(content, bannerText)
+      //plotBanner(content, bannerText)
 
-      plotForm(content)
+      //plotForm(content)
 
-      plotFooter(content)
+      //plotFooter(content)
     }
   }
 
